@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: nginx-deployment
   labels:
-    app: nginx-chart
+    app: {{ .Values.appname }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-chart
+      app: {{ .Values.appname }}
   template:
     metadata:
       name: nginx-chart
       labels:
-        app: nginx-chart
+        app: {{ .Values.appname }}
     spec:
       containers:
-        - name: nginx
-          image: nginx:trixie
+        - name: {{ .Values.image.repository }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
