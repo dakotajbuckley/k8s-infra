@@ -2,4 +2,4 @@ appname: nginx-hell-yeah
 
 image:
   repository: nginx
-  tag: "1.30"
+  tag: "alpine"
