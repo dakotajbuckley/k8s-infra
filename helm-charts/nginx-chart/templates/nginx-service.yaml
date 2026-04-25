@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: nginx-service
   labels:
-    app: {{ .Values.appname }}
+    app: nginx-chart
 spec:
   ports:
     - port: 80
       targetPort: 80
       nodePort: 30003
   selector:
-    app: {{ .Values.appname }}
+    app: nginx-chart
   type: NodePort
