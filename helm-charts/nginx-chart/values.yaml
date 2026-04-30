@@ -1,5 +1,0 @@
-appname: nginx-hell-yeah
-
-image:
-  repository: nginx
-  tag: "alpine"

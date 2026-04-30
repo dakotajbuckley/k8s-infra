@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-azure
+spec:
+  acme:
+    email: statisticsman1@gmail.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-azure-account-key
+    solvers:
+      - dns01:
+          azureDNS:
+            clientID: f997ce2d-26b4-4d02-b85c-ec42decdee8a
+            clientSecretSecretRef:
+              name: azure-dns-secret
+              key: client-secret
+            subscriptionID: 34e319cb-4ae6-4331-9b70-138fe7820f78
+            tenantID: 6afe2c08-005f-4f3b-8ac3-99458dd7a365
+            resourceGroupName: rg-01
+            hostedZoneName: dakotabuilds.dev
