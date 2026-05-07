@@ -13,7 +13,7 @@ spec:
         valueFiles:
           - $values/values/argocd/values.yaml
     - repoURL: git@github.com:dakotajbuckley/kubernetes-configurations.git
-      targetRevision: master
+      targetRevision: main
       ref: values
 
   destination:
