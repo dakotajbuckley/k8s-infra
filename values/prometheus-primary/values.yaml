@@ -5,3 +5,5 @@ prometheus-pushgateway:
 server:
   extraFlags:
     - web.enable-remote-write-receiver
+  service:
+    type: NodePort
