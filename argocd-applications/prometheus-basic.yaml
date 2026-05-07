@@ -14,6 +14,10 @@ spec:
         - name: crds.enabled
           value: "true"
       values: |
+        alertmanager:
+          enabled: false
+        prometheus-pushgateway:
+          enabled: false
         extraScrapeConfigs: |
           - job_name: 'federate-secondary'
             scrape_interval: 30s
