@@ -2,17 +2,6 @@ alertmanager:
   enabled: false
 prometheus-pushgateway:
   enabled: false
-extraScrapeConfigs: |
-  - job_name: 'federate-secondary'
-    scrape_interval: 30s
-    honor_labels: true
-    metrics_path: /federate
-    params:
-      'match[]':
-        - 'up'
-        - '{job=~".+"}'
-    static_configs:
-      - targets:
-          - 'prometheus-secondary-server.monitoring-secondary.svc.cluster.local:80'
-        labels:
-          cluster: 'secondary-sim'
+server:
+  extraFlags:
+    - web.enable-remote-write-receiver
