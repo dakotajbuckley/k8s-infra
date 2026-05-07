@@ -6,3 +6,9 @@ kube-state-metrics:
   enabled: false
 prometheus-node-exporter:
   enabled: false
+server:
+      global:
+        external_labels:
+          cluster: prometheus-secondary
+      remoteWrite:
+        - url: http://prometheus-basic-server.prometheus-primary.svc.cluster.local/api/v1/write
