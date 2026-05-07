@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-basic
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      targetRevision: 29.2.1
+      chart: prometheus
+      helm:
+        parameters:
+          - name: crds.enabled
+            value: "true"
+        valueFiles:
+          - $values/values/prometheus-primary/values.yaml
+    - repoURL: git@github.com:dakotajbuckley/kubernetes-configurations.git
+      targetRevision: main
+      ref: values
+
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prometheus-primary
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
