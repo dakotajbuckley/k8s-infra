@@ -5,10 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 9.5.12
-    chart: argo-cd
+  sources:
+    - repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: 9.5.12
+      chart: argo-cd
+      helm:
+        valueFiles:
+          - $values/values/argocd/values.yaml
+    - repoURL: git@github.com:dakotajbuckley/kubernetes-configurations.git
+      targetRevision: master
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
