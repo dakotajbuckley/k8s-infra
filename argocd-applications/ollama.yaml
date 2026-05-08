@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ollama
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.otwld.com/
+      targetRevision: 1.56.0
+      chart: ollama
+      helm:
+        valueFiles:
+          - $values/values/ollama/values.yaml
+    - repoURL: git@github.com:dakotajbuckley/kubernetes-configurations.git
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ollama
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
