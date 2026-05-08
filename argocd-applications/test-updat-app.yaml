@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-test-app
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: nginx=kodafoo/nginx-test-repo:latest
+    argocd-image-updater.argoproj.io/nginx.update-strategy: digest
+    argocd-image-updater.argoproj.io/nginx.kustomize.image-name: kodafoo/nginx-test-repo
+    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/write-back-target: kustomization
+    argocd-image-updater.argoproj.io/git-branch: main
+spec:
+  project: default
+  sources:
+    - repoURL: git@github.com:dakotajbuckley/helm-charts.git
+      targetRevision: main
+      path: .
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
