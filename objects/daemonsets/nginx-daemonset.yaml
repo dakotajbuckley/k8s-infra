@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset
+  namespace: default
+  labels:
+    app: nginx-daemonset
+spec:
+  template:
+    metadata:
+      name: nginx-daemonset-pod
+      labels:
+        app: nginx-daemonset
+    spec:
+      containers:
+      - name: webapp
+        image: kodekloud/webapp-color
+  selector:
+    matchLabels:
+      app: nginx-daemonset
