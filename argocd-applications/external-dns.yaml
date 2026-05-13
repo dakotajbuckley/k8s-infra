@@ -10,6 +10,9 @@ spec:
       targetRevision: 1.21.1
       chart: external-dns
       helm:
+        parameters:
+          - name: crds.enabled
+            value: "true"
         valueFiles:
         - $values/values/external-dns/values.yaml
 
