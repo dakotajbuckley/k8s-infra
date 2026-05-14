@@ -4,6 +4,9 @@ metadata:
   name: nginx-daemonset-service
   labels:
     app: nginx-daemonset
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: nginx.dakotabuilds.dev
+    external-dns.alpha.kubernetes.io/target: 1.2.3.4
 spec:
   type: NodePort
   ports:
