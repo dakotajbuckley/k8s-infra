@@ -1,0 +1,17 @@
+apiVersion: external-secrets.io/v1
+kind: ClusterSecretStore
+metadata:
+  name: dakotabuilds-kv
+  namespace: external-secrets
+spec:
+  provider:
+    azurekv:
+      tenantId: "6afe2c08-005f-4f3b-8ac3-99458dd7a365"
+      vaultUrl: "https://dakotabuilds-kv.vault.azure.net/"
+      authSecretRef:
+        clientId:
+          name: azure-secret-sp
+          key: ClientID
+        clientSecret:
+          name: azure-secret-sp
+          key: ClientSecret
