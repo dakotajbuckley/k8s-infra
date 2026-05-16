@@ -10,5 +10,9 @@ server:
       global:
         external_labels:
           cluster: prometheus-secondary
+      hostAliases:
+      - ip: "10.0.0.247"
+        hostnames:
+        - "prometheus.dakotabuilds.dev"
       remoteWrite:
-        - url: http://prometheus-basic-server.prometheus-primary.svc.cluster.local/api/v1/write
+        - url: https://prometheus.dakotabuilds.dev/api/v1/write
