@@ -5,5 +5,18 @@ prometheus-pushgateway:
 server:
   extraFlags:
     - web.enable-remote-write-receiver
+    - web.config.file=/etc/prometheus/web-config/web-config.yml
+  probeScheme: HTTPS
+  extraSecretMounts:
+  - name: prometheus-server-tls
+    mountPath: /etc/prometheus/tls
+    secretName: prometheus-server-tls
+    readOnly: true
+  extraConfigmapMounts:
+  - name: prometheus-web-config
+    mountPath: /etc/prometheus/web-config
+    configMap: prometheus-web-config
+    readOnly: true
   service:
     type: LoadBalancer
+    servicePort: 443
